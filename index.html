@@ -1,240 +1,565 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Creative Papelaria</title>
-    <link rel="stylesheet" href="CSS/site.css">
+    <title>Creative Papelaria - Catálogo</title>
+
+    <!-- Bootstrap 5.3.8 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-   
 
+    <style>
+        body {
+            overflow-x: hidden;
+        }
+
+        .card {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+
+        .form-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-full {
+            width: 100%;
+            height: 350px;
+            position: relative;
+        }
+
+        .jumbotron-volta {
+            background-image: url('/imagens/ChatGPT Image 1 de dez. de 2025, 19_49_55.png'); /* coloque sua imagem aqui */
+            background-size: cover; /* imagem sempre cheia */
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        /* leve escurecimento para o texto (opcional) */
+        .jumbotron-volta::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+        }
+
+        .jumbotron-volta .container {
+            position: relative;
+            z-index: 2;
+        }
+    </style>
 </head>
-<body>
 
-     <header>
-        <h1><img src="imagens/loja.png" alt="Creative Papelaria"></h1>
+<body class="bg-light">
 
-        <a href="carrinho.html" class="sacola">
-            <img src="imagens/cesta.png" alt="sacola de compras" id="compras">
-            <span class="contador">0</span>
-        </a> 
-        <nav class="menu-opcoes">
-            <ul>
-             <li><a href="#">Sua Conta</a></li>
-             <li><a href="#">Lista de Desejos</a></li>
-             <li><a href="#">Cartão Fidelidade</a></li>
-             <li><a href="index-sobre.html">Sobre</a></li>
-             <li><a href="login.html">Login</a></li>
-            </ul>
-        </nav>
-    <nav >
-    <div class="search-box">
-        <input type="text" placeholder="Buscar produtos...">
-        <button><i class="fas fa-search"></i></button>
-    </div>
-</nav>
-</header>
+<!-- HEADER -->
+<header class="bg-white shadow-sm">
+    <div class="container py-3">
+        <div class="row align-items-center">
+            <div class="col-md-3 col-12 text-center text-md-start mb-3 mb-md-0">
+                <img src="imagens/loja.png" alt="Creative Papelaria" height="70">
+            </div>
+            <div class="col-md-6 col-12 text-center">
 
-
- <!-- fim da parte do cabeçalho menu e destaque busca-->
-
- <!--começo  parte do destaque tipos de materias-->
-
-
- <nav class="menu">
-    <ul>
-
-        <li class="dropdown" >
-            <a href="#" id="btnProdutos">Produtos ⮟</a>
-            <ul class="submenu">
-                <li><a href="destaques.html" data-cat="destaques" id="btnDestaques">Destaques</a></li>
-                <li><a href="papelaria.html" data-cat="papelaria">Papelaria</a></li>
-                <li><a href="escritorio.html" data-cat="escritorio">Escritório</a></li>
-                <li><a href="brinquedos.html" data-cat="brinquedos">Brinquedos</a></li>
-                <li><a href="papeis.html" data-cat="papeis">Papéis Especiais</a></li>
-                <li><a href="artesanato.html" data-cat="artesanato">Materiais de Artesanato</a></li>
-            </ul>
-        </li>
-    </ul>
-</nav>
-    <section id="produtos"></section>
-    
-</div>
-<!-- fim da parte do destaque-->
-
-<div class="painel-container">
-
-    <section class="painel novidades">
-        <h2>Novidades</h2>
-        <ol>
-            <li>
-                <a href="produto.html">
-                    <figure>
-                        <img src="imagens/nov1.jpg" alt="kit" class="products">
-                        <figcaption>Tinta Glitter Spray colorido R$ 18,00</figcaption>
-                        <button class="btn">Comprar</button>
-                    </figure>
+            </div>
+            <div class="col-md-3 col-12 text-center text-md-end">
+                <a href="tel:1199999999" class="btn btn-outline-primary btn-sm me-2">
+                    <i class="fas fa-phone"></i> (11) 99999-9999
                 </a>
-            </li>
-            <!-- podem ser colocados mais produtos aqui -->
-            <li>
-                <a href="produto.html">
-                    <figure>
-                        <img src="imagens/nov2.jpg" alt="livro" class="products">
-                        <figcaption>Livro Caça-Palvras Sudoku R$ 20,00</figcaption>
-                        <button class="btn">Comprar</button>
-                    </figure>
-                </a>
-            </li>
-
-             <li>
-                <a href="produto.html">
-                    <figure>
-                        <img src="imagens/nov3.jpg" alt="mochila" class="products">
-                        <figcaption>Mochila com alça Marie R$54,00</figcaption>
-                        <button class="btn">Comprar</button>
-                    </figure>
-                </a>
-            </li>
-
-             <li>
-                <a href="produto.html">
-                    <figure>
-                        <img src="imagens/nov4.jpg" alt="giz" class="products">
-                        <figcaption>Giz Liquido Branco grosso R$ 19,00</figcaption>
-                        <button class="btn">Comprar</button>
-                    </figure>
-                </a>
-            </li>
-
-             <li>
-                <a href="produto.html">
-                    <figure>
-                        <img src="imagens/nov5.jpg" alt="lousa" class="products">
-                        <figcaption>Lousa Verde Madeira Souza R$ 98,00</figcaption>
-                        <button class="btn">Comprar</button>
-                    </figure>
-                </a>
-            </li>
-
-             <li>
-                <a href="produto.html">
-                    <figure>
-                        <img src="imagens/nov6.jpg" alt="kit canetas" class="products">
-                        <figcaption>kit Caneta gel Com Glitter R$ 18,00</figcaption>
-                        <button class="btn">Comprar</button>
-                    </figure>
-                </a>
-            </li>
-
-        </ol>
-    </section>
-
-    <!-- produtos mais vendidos aqui trocar os produtos  -->
-     <section class="painel mais-vendidos">
-        <h2>Mais Vendidos</h2>
-        <ol>
-            <li>
-                <a href="produto.html">
-                    <figure>
-                        <img src="imagens/mv1.jpg" alt="borrcha" class="products">
-                        <figcaption>Borracha Faber Castell R$ 12,00</figcaption>
-                        <button class="btn">Comprar</button>
-                    </figure>
-                </a>
-            </li>
-
-             <li>
-                <a href="produto.html">
-                    <figure>
-                        <img src="imagens/mv2.jpg" alt="caneta" class="products">
-                        <figcaption>Caneta Bic 4 cores R$ 12,95</figcaption>
-                        <button class="btn">Comprar</button>
-                    </figure>
-                </a>
-            </li>
-             <li>
-                <a href="produto.html">
-                    <figure>
-                        <img src="imagens/mv3.jpg" alt="papel" class="products">
-                        <figcaption>Papel Fotográfico Glossy R$ 23,00</figcaption>
-                        <button class="btn">Comprar</button>
-                    </figure>
-                </a>
-            </li>
-             <li>
-                <a href="produto.html">
-                    <figure>
-                        <img src="imagens/mv4.jpg" alt="marcador" class="products">
-                        <figcaption>Marcador Pilot Retro Projetor R$ 12,95</figcaption>
-                        <button class="btn">Comprar</button>
-                    </figure>
-                </a>
-            </li>
-             <li>
-                <a href="produto.html">
-                    <figure>
-                        <img src="imagens/mv5.jpg" alt="sulfite" class="products">
-                        <figcaption>Papel Sulfite Epson 500fls R$ 235,00</figcaption>
-                        <button class="btn">Comprar</button>
-                    </figure>
-                </a>
-            </li>
-             <li>
-                <a href="produto.html">
-                    <figure>
-                        <img src="imagens/mv6.jpg" alt="caderno" class="products">
-                        <figcaption>Caderno decorado Tilibra R$ 29,95</figcaption>
-                        <button class="btn">Comprar</button>
-                    </figure>
-                </a>
-            </li>
-        </ol>
-     </section>
-    </div>
-    
-    <footer>
-        <div class="footer-col">
-            <h3>Creative Papelaria</h3>
-            <p>Av. das Flores, 123 - São Paulo/SP</p>
-            <p>Contato: (11) 99999-9999</p>
-            <p>Email: contato@creativepapelaria.com</p>
-        </div>
-
-        <div class="footer-col">
-            <h4>Links úteis</h4>
-            <a href="#">Sobre nós</a>
-            <a href="#">Política de Privacidade</a>
-            <a href="#">Trocas e Devoluções</a>
-            <a href="#">Fale Conosco</a>
-        </div>
-
-        <div class="footer-col">
-            <h4>Siga nossas redes</h4>
-            <div class="social-icons">
-                <a href="#">📘</a>
-                <a href="#">📸</a>
-                <a href="#">🎵</a>
-                <a href="#">💬</a>
             </div>
         </div>
+    </div>
+</header>
 
-        <div class="footer-col">
-            <h4>Receba novidades</h4>
-            <input type="email" placeholder="Seu e-mail">
-            <button>Inscrever</button>
+<!-- HERO SECTION -->
+<svg viewBox="0 0 1920 350" xmlns="http://www.w3.org/2000/svg">
+    <!-- Fundo gradiente laranja -->
+    <defs>
+        <radialGradient id="orangeGradient" cx="50%" cy="50%">
+            <stop offset="0%" style="stop-color:#FFD700;stop-opacity:1" />
+            <stop offset="50%" style="stop-color:#FFA500;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#FF8C00;stop-opacity:1" />
+        </radialGradient>
+
+        <filter id="shadow">
+            <feDropShadow dx="0" dy="4" stdDeviation="6" flood-opacity="0.3"/>
+        </filter>
+    </defs>
+
+    <!-- Fundo -->
+    <rect width="1920" height="350" fill="url(#orangeGradient)"/>
+
+    <!-- Elementos decorativos de fundo -->
+    <circle cx="200" cy="100" r="80" fill="#FFB733" opacity="0.3"/>
+    <circle cx="1700" cy="250" r="100" fill="#FFB733" opacity="0.3"/>
+
+    <!-- Pilha de livros (esquerda) -->
+    <g transform="translate(100, 150)">
+        <!-- Livro 1 (verde escuro) -->
+        <rect x="0" y="120" width="200" height="30" fill="#2D5016" rx="2"/>
+        <rect x="0" y="120" width="200" height="8" fill="#4A7C2B" rx="2"/>
+
+        <!-- Livro 2 (azul) -->
+        <rect x="10" y="85" width="180" height="35" fill="#0066CC" rx="2"/>
+        <rect x="10" y="85" width="180" height="10" fill="#0088FF" rx="2"/>
+
+        <!-- Livro 3 (verde médio) -->
+        <rect x="5" y="50" width="190" height="35" fill="#4A7C2B" rx="2"/>
+        <rect x="5" y="50" width="190" height="10" fill="#5FA52E" rx="2"/>
+
+        <!-- Livro 4 (amarelo) -->
+        <rect x="15" y="20" width="170" height="30" fill="#D4A017" rx="2"/>
+        <rect x="15" y="20" width="170" height="8" fill="#FFD700" rx="2"/>
+    </g>
+
+    <!-- Caixa azul "VOLTA ÀS AULAS" -->
+    <g transform="translate(320, 80)">
+        <!-- Tampa -->
+        <rect x="0" y="0" width="380" height="25" fill="#0066CC" rx="8"/>
+        <rect x="10" y="5" width="360" height="15" fill="#E6E6E6" rx="4" opacity="0.3"/>
+
+        <!-- Corpo da caixa -->
+        <rect x="0" y="25" width="380" height="160" fill="#0066CC" rx="4"/>
+        <rect x="0" y="23" width="380" height="8" fill="#0088FF"/>
+
+        <!-- Texto VOLTA -->
+        <text x="190" y="95" font-family="Arial Black, sans-serif" font-size="56" font-weight="900" fill="#FFFFFF" text-anchor="middle" letter-spacing="2">VOLTA</text>
+
+        <!-- Círculo "ÀS" -->
+        <circle cx="250" cy="115" r="18" fill="#FFD700"/>
+        <text x="250" y="122" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#0066CC" text-anchor="middle">ÀS</text>
+
+        <!-- Texto AULAS -->
+        <text x="190" y="160" font-family="Arial Black, sans-serif" font-size="56" font-weight="900" fill="#FFFFFF" text-anchor="middle" letter-spacing="2">AULAS</text>
+    </g>
+
+    <!-- Lápis e caneta -->
+    <g transform="translate(730, 100)">
+        <!-- Caneta (amarela/verde) -->
+        <rect x="0" y="0" width="35" height="130" fill="#5FA52E" rx="6"/>
+        <rect x="0" y="0" width="35" height="40" fill="#F4D03F" rx="6"/>
+        <ellipse cx="17.5" cy="40" rx="17.5" ry="8" fill="#C0C0C0"/>
+        <polygon points="17.5,130 7.5,150 27.5,150" fill="#2D5016"/>
+
+        <!-- Lápis -->
+        <g transform="translate(50, -20)">
+            <rect x="0" y="0" width="30" height="140" fill="#5FA52E" rx="5"/>
+            <rect x="0" y="0" width="30" height="35" fill="#F4D03F" rx="5"/>
+            <ellipse cx="15" cy="35" rx="15" ry="6" fill="#C0C0C0"/>
+            <polygon points="15,140 6,158 24,158" fill="#8B4513"/>
+            <polygon points="15,158 12,168 18,168" fill="#2D2D2D"/>
+        </g>
+    </g>
+
+    <!-- Texto "MATERIAL ESCOLAR com até" -->
+    <text x="1150" y="100" font-family="Arial Black, sans-serif" font-size="52" font-weight="900" fill="#B30000" text-anchor="start" letter-spacing="1">MATERIAL</text>
+    <text x="1150" y="155" font-family="Arial Black, sans-serif" font-size="52" font-weight="900" fill="#B30000" text-anchor="start" letter-spacing="1">ESCOLAR</text>
+    <text x="1150" y="200" font-family="Brush Script MT, cursive" font-size="46" font-weight="normal" fill="#B30000" text-anchor="start" font-style="italic">com até</text>
+
+    <!-- Destaque "50% DESCONTO" -->
+    <g transform="translate(1120, 210)">
+        <!-- Número 50 grande -->
+        <text x="0" y="90" font-family="Impact, Arial Black, sans-serif" font-size="110" font-weight="900" fill="#CC0000" letter-spacing="-5" filter="url(#shadow)">50</text>
+
+        <!-- Símbolo % -->
+        <text x="200" y="50" font-family="Impact, Arial Black, sans-serif" font-size="50" font-weight="900" fill="#CC0000">%</text>
+
+        <!-- Box DESCONTO -->
+        <rect x="240" y="55" width="380" height="65" fill="#CC0000" rx="4"/>
+        <text x="430" y="100" font-family="Arial Black, sans-serif" font-size="46" font-weight="900" fill="#FFFFFF" text-anchor="middle" letter-spacing="2">DESCONTO</text>
+    </g>
+
+    <!-- Elementos decorativos (folhas verdes) -->
+    <ellipse cx="80" cy="320" rx="40" ry="15" fill="#2D5016" opacity="0.6"/>
+    <ellipse cx="140" cy="330" rx="50" ry="18" fill="#4A7C2B" opacity="0.6"/>
+</svg>
+
+<!-- CONTEÚDO -->
+<main class="">
+
+    <!-- Novidades -->
+    <section class="mb-5">
+        <div class="container">
+            <h2 class="pt-4 mb-4 fw-bold text-center">Novidades</h2>
+
+            <div class="row g-4">
+
+                <!-- Card 1 -->
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="card shadow-sm">
+                        <img src="imagens/nov1.jpg" class="card-img-top" alt="Tinta Glitter Spray">
+                        <div class="card-body text-center">
+                            <p class="card-text small mb-2">Tinta Glitter Spray</p>
+                            <p class="fw-bold text-primary mb-0">R$ 18,00</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="card shadow-sm">
+                        <img src="imagens/nov2.jpg" class="card-img-top" alt="Livro Caça-Palavras">
+                        <div class="card-body text-center">
+                            <p class="card-text small mb-2">Livro Caça-Palavras</p>
+                            <p class="fw-bold text-primary mb-0">R$ 20,00</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="card shadow-sm">
+                        <img src="imagens/nov3.jpg" class="card-img-top" alt="Mochila Marie">
+                        <div class="card-body text-center">
+                            <p class="card-text small mb-2">Mochila Marie</p>
+                            <p class="fw-bold text-primary mb-0">R$ 54,00</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="card shadow-sm">
+                        <img src="imagens/nov4.jpg" class="card-img-top" alt="Giz Líquido">
+                        <div class="card-body text-center">
+                            <p class="card-text small mb-2">Giz Líquido</p>
+                            <p class="fw-bold text-primary mb-0">R$ 19,00</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="card shadow-sm">
+                        <img src="imagens/nov5.jpg" class="card-img-top" alt="Lousa Verde">
+                        <div class="card-body text-center">
+                            <p class="card-text small mb-2">Lousa Verde</p>
+                            <p class="fw-bold text-primary mb-0">R$ 98,00</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="card shadow-sm">
+                        <img src="imagens/nov6.jpg" class="card-img-top" alt="Kit Canetas Glitter">
+                        <div class="card-body text-center">
+                            <p class="card-text small mb-2">Kit Canetas Glitter</p>
+                            <p class="fw-bold text-primary mb-0">R$ 18,00</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Mais vendidos -->
+    <section class="mb-5">
+        <div class="container">
+            <h2 class="mb-4 fw-bold text-center">Mais Vendidos</h2>
+
+            <div class="row g-4">
+
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="card shadow-sm">
+                        <img src="imagens/mv1.jpg" class="card-img-top" alt="Borracha Faber Castell">
+                        <div class="card-body text-center">
+                            <p class="small mb-2">Borracha Faber Castell</p>
+                            <p class="fw-bold text-primary mb-0">R$ 12,00</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="card shadow-sm">
+                        <img src="imagens/mv2.jpg" class="card-img-top" alt="Caneta Bic 4 cores">
+                        <div class="card-body text-center">
+                            <p class="small mb-2">Caneta Bic 4 cores</p>
+                            <p class="fw-bold text-primary mb-0">R$ 12,95</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="card shadow-sm">
+                        <img src="imagens/mv3.jpg" class="card-img-top" alt="Papel Glossy">
+                        <div class="card-body text-center">
+                            <p class="small mb-2">Papel Glossy</p>
+                            <p class="fw-bold text-primary mb-0">R$ 23,00</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="card shadow-sm">
+                        <img src="imagens/mv4.jpg" class="card-img-top" alt="Marcador Retro">
+                        <div class="card-body text-center">
+                            <p class="small mb-2">Marcador Retro</p>
+                            <p class="fw-bold text-primary mb-0">R$ 12,95</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="card shadow-sm">
+                        <img src="imagens/mv5.jpg" class="card-img-top" alt="Sulfite Epson">
+                        <div class="card-body text-center">
+                            <p class="small mb-2">Sulfite Epson</p>
+                            <p class="fw-bold text-primary mb-0">R$ 235,00</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="card shadow-sm">
+                        <img src="imagens/mv6.jpg" class="card-img-top" alt="Caderno Tilibra">
+                        <div class="card-body text-center">
+                            <p class="small mb-2">Caderno Tilibra</p>
+                            <p class="fw-bold text-primary mb-0">R$ 29,95</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+    </section>
+
+    <!-- FORMULÁRIO DE ORÇAMENTO -->
+    <section class="form-section py-5">
+        <!-- Decorative Elements -->
+        <div class="position-absolute top-0 start-0 w-100 h-100 opacity-10" style="pointer-events: none;">
+            <div class="position-absolute"
+                 style="top: 10%; left: 5%; width: 100px; height: 100px; background: white; border-radius: 50%; filter: blur(40px);"></div>
+            <div class="position-absolute"
+                 style="bottom: 20%; right: 10%; width: 150px; height: 150px; background: white; border-radius: 50%; filter: blur(60px);"></div>
+            <div class="position-absolute"
+                 style="top: 40%; right: 5%; width: 80px; height: 80px; background: white; border-radius: 50%; filter: blur(30px);"></div>
+        </div>
+        <div class="container position-relative">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+
+                    <!-- Cabeçalho do Formulário -->
+                    <div class="text-center mb-5">
+                        <h2 class="fw-bold mb-3 text-white">Solicite seu Orçamento</h2>
+                        <p class="text-white lead">Preencha o formulário abaixo e entraremos em contato em até 24
+                            horas</p>
+                    </div>
+
+                    <!-- Card do Formulário -->
+                    <div class="border-0" style="backdrop-filter: blur(10px); background: rgba(255, 255, 255, 0.95);">
+                        <div class="card-body p-4 p-md-5">
+                            <form id="orcamentoForm">
+                                <div class="row g-4">
+
+                                    <!-- Dados Pessoais -->
+                                    <div class="col-12">
+                                        <h5 class="fw-bold text-primary mb-3">
+                                            <i class="fas fa-user me-2"></i>Dados Pessoais
+                                        </h5>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="nome" class="form-label fw-semibold">
+                                            Nome Completo <span class="text-danger">*</span>
+                                        </label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                            <input type="text" class="form-control" id="nome"
+                                                   placeholder="Digite seu nome completo" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="email" class="form-label fw-semibold">
+                                            E-mail <span class="text-danger">*</span>
+                                        </label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                            <input type="email" class="form-control" id="email"
+                                                   placeholder="seu@email.com" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="telefone" class="form-label fw-semibold">
+                                            Telefone/WhatsApp <span class="text-danger">*</span>
+                                        </label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                            <input type="tel" class="form-control" id="telefone"
+                                                   placeholder="(11) 99999-9999" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="empresa" class="form-label fw-semibold">
+                                            Empresa
+                                        </label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="fas fa-building"></i></span>
+                                            <input type="text" class="form-control" id="empresa"
+                                                   placeholder="Nome da sua empresa (opcional)">
+                                        </div>
+                                    </div>
+
+                                    <!-- Divider -->
+                                    <div class="col-12">
+                                        <hr class="my-2">
+                                    </div>
+
+                                    <!-- Detalhes do Orçamento -->
+                                    <div class="col-12">
+                                        <h5 class="fw-bold text-primary mb-3">
+                                            <i class="fas fa-shopping-cart me-2"></i>Detalhes do Orçamento
+                                        </h5>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="categoria" class="form-label fw-semibold">
+                                            Categoria de Produtos
+                                        </label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="fas fa-tags"></i></span>
+                                            <select class="form-select" id="categoria">
+                                                <option value="">Selecione uma categoria</option>
+                                                <option value="papelaria">Papelaria</option>
+                                                <option value="escritorio">Escritório</option>
+                                                <option value="brinquedos">Brinquedos</option>
+                                                <option value="papeis">Papéis Especiais</option>
+                                                <option value="artesanato">Artesanato</option>
+                                                <option value="diversos">Diversos</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="quantidade" class="form-label fw-semibold">
+                                            Quantidade Estimada
+                                        </label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="fas fa-box"></i></span>
+                                            <input type="text" class="form-control" id="quantidade"
+                                                   placeholder="Ex: 50 unidades, 10 caixas">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label for="produtos" class="form-label fw-semibold">
+                                            Produtos de Interesse <span class="text-danger">*</span>
+                                        </label>
+                                        <textarea class="form-control" id="produtos" rows="4"
+                                                  placeholder="Descreva os produtos que você deseja orçar. Exemplo:
+- 10 caixas de canetas azuis
+- 5 resmas de papel A4
+- 20 cadernos universitários" required></textarea>
+                                        <small class="text-muted">Seja o mais específico possível para um orçamento mais
+                                            preciso</small>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label for="mensagem" class="form-label fw-semibold">
+                                            Informações Adicionais
+                                        </label>
+                                        <textarea class="form-control" id="mensagem" rows="4"
+                                                  placeholder="Prazo de entrega, forma de pagamento preferida, observações especiais, etc."></textarea>
+                                    </div>
+
+                                    <!-- Checkbox -->
+                                    <div class="col-12">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="aceiteTermos" required>
+                                            <label class="form-check-label" for="aceiteTermos">
+                                                Aceito receber informações sobre produtos e promoções por e-mail
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <!-- Botões -->
+                                    <div class="col-12 text-center mt-4">
+                                        <button type="submit" class="btn btn-primary btn-lg px-5 py-3 shadow">
+                                            <i class="fas fa-paper-plane me-2"></i>Enviar Solicitação
+                                        </button>
+                                        <p class="text-muted small mt-3 mb-0">
+                                            <i class="fas fa-shield-alt me-1"></i>
+                                            Seus dados estão seguros e não serão compartilhados
+                                        </p>
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="bg-dark text-light pt-5 pb-3">
+    <div class="container">
+
+        <div class="row text-center text-md-start mb-4">
+
+            <div class="col-md-4 mb-4">
+                <h5 class="fw-bold mb-3">Creative Papelaria</h5>
+                <p><i class="fas fa-map-marker-alt me-2"></i>Av. das Flores, 123 – São Paulo/SP</p>
+                <p><i class="fas fa-phone me-2"></i>(11) 99999-9999</p>
+                <p><i class="fas fa-envelope me-2"></i>contato@creativepapelaria.com</p>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <h5 class="fw-bold mb-3">Horário de Atendimento</h5>
+                <p>Segunda a Sexta: 9h às 18h</p>
+                <p>Sábado: 9h às 13h</p>
+                <p>Domingo: Fechado</p>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <h5 class="fw-bold mb-3">Siga nossas redes</h5>
+                <div class="d-flex justify-content-center justify-content-md-start gap-3 fs-3">
+                    <a href="#" class="text-light"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="text-light"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-light"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" class="text-light"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="text-center pt-3 border-top border-secondary">
+            <p class="mb-0">© 2025 Creative Papelaria - Todos os direitos reservados.</p>
         </div>
 
     </div>
-
-    <div class="footer-bottom">
-        © 2025 Creative Papelaria - Todos os direitos reservados.
-    </div>
-
-        </ul>
-    </div>
 </footer>
-<script src="projeto.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 
 </html>
