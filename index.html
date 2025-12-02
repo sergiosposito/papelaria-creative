@@ -21,6 +21,12 @@
             height: 100%;
             display: flex;
             flex-direction: column;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2) !important;
         }
 
         .card-img-top {
@@ -35,6 +41,18 @@
             justify-content: space-between;
         }
 
+        .preco-original {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 0.9em;
+        }
+
+        .badge-novidade {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 1;
+        }
 
         .form-section {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -48,24 +66,18 @@
             position: relative;
         }
 
-        .jumbotron-volta {
-            background-image: url('/imagens/ChatGPT Image 1 de dez. de 2025, 19_49_55.png'); /* coloque sua imagem aqui */
-            background-size: cover; /* imagem sempre cheia */
-            background-position: center;
-            background-repeat: no-repeat;
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 300px;
         }
 
-        /* leve escurecimento para o texto (opcional) */
-        .jumbotron-volta::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            z-index: 1;
-        }
-
-        .jumbotron-volta .container {
-            position: relative;
-            z-index: 2;
+        .filter-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
         }
     </style>
 </head>
@@ -80,7 +92,12 @@
                 <img src="imagens/loja.png" alt="Creative Papelaria" height="70">
             </div>
             <div class="col-md-6 col-12 text-center">
-
+                <div class="input-group">
+                    <input type="text" class="form-control" id="buscaProduto" placeholder="Buscar produtos...">
+                    <button class="btn btn-primary" type="button" onclick="buscarProdutos()">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
             </div>
             <div class="col-md-3 col-12 text-center text-md-end">
                 <a href="tel:1199999999" class="btn btn-outline-primary btn-sm me-2">
@@ -93,75 +110,53 @@
 
 <!-- HERO SECTION -->
 <svg viewBox="0 0 1920 350" xmlns="http://www.w3.org/2000/svg">
-    <!-- Fundo gradiente laranja -->
     <defs>
         <radialGradient id="orangeGradient" cx="50%" cy="50%">
-            <stop offset="0%" style="stop-color:#FFD700;stop-opacity:1" />
-            <stop offset="50%" style="stop-color:#FFA500;stop-opacity:1" />
-            <stop offset="100%" style="stop-color:#FF8C00;stop-opacity:1" />
+            <stop offset="0%" style="stop-color:#FFD700;stop-opacity:1"/>
+            <stop offset="50%" style="stop-color:#FFA500;stop-opacity:1"/>
+            <stop offset="100%" style="stop-color:#FF8C00;stop-opacity:1"/>
         </radialGradient>
-
         <filter id="shadow">
             <feDropShadow dx="0" dy="4" stdDeviation="6" flood-opacity="0.3"/>
         </filter>
     </defs>
-
-    <!-- Fundo -->
     <rect width="1920" height="350" fill="url(#orangeGradient)"/>
-
-    <!-- Elementos decorativos de fundo -->
     <circle cx="200" cy="100" r="80" fill="#FFB733" opacity="0.3"/>
     <circle cx="1700" cy="250" r="100" fill="#FFB733" opacity="0.3"/>
 
-    <!-- Pilha de livros (esquerda) -->
     <g transform="translate(100, 150)">
-        <!-- Livro 1 (verde escuro) -->
         <rect x="0" y="120" width="200" height="30" fill="#2D5016" rx="2"/>
         <rect x="0" y="120" width="200" height="8" fill="#4A7C2B" rx="2"/>
-
-        <!-- Livro 2 (azul) -->
         <rect x="10" y="85" width="180" height="35" fill="#0066CC" rx="2"/>
         <rect x="10" y="85" width="180" height="10" fill="#0088FF" rx="2"/>
-
-        <!-- Livro 3 (verde médio) -->
         <rect x="5" y="50" width="190" height="35" fill="#4A7C2B" rx="2"/>
         <rect x="5" y="50" width="190" height="10" fill="#5FA52E" rx="2"/>
-
-        <!-- Livro 4 (amarelo) -->
         <rect x="15" y="20" width="170" height="30" fill="#D4A017" rx="2"/>
         <rect x="15" y="20" width="170" height="8" fill="#FFD700" rx="2"/>
     </g>
 
-    <!-- Caixa azul "VOLTA ÀS AULAS" -->
     <g transform="translate(320, 80)">
-        <!-- Tampa -->
         <rect x="0" y="0" width="380" height="25" fill="#0066CC" rx="8"/>
         <rect x="10" y="5" width="360" height="15" fill="#E6E6E6" rx="4" opacity="0.3"/>
-
-        <!-- Corpo da caixa -->
         <rect x="0" y="25" width="380" height="160" fill="#0066CC" rx="4"/>
         <rect x="0" y="23" width="380" height="8" fill="#0088FF"/>
-
-        <!-- Texto VOLTA -->
-        <text x="190" y="95" font-family="Arial Black, sans-serif" font-size="56" font-weight="900" fill="#FFFFFF" text-anchor="middle" letter-spacing="2">VOLTA</text>
-
-        <!-- Círculo "ÀS" -->
+        <text x="190" y="95" font-family="Arial Black, sans-serif" font-size="56" font-weight="900" fill="#FFFFFF"
+              text-anchor="middle" letter-spacing="2">VOLTA
+        </text>
         <circle cx="250" cy="115" r="18" fill="#FFD700"/>
-        <text x="250" y="122" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#0066CC" text-anchor="middle">ÀS</text>
-
-        <!-- Texto AULAS -->
-        <text x="190" y="160" font-family="Arial Black, sans-serif" font-size="56" font-weight="900" fill="#FFFFFF" text-anchor="middle" letter-spacing="2">AULAS</text>
+        <text x="250" y="122" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#0066CC"
+              text-anchor="middle">ÀS
+        </text>
+        <text x="190" y="160" font-family="Arial Black, sans-serif" font-size="56" font-weight="900" fill="#FFFFFF"
+              text-anchor="middle" letter-spacing="2">AULAS
+        </text>
     </g>
 
-    <!-- Lápis e caneta -->
     <g transform="translate(730, 100)">
-        <!-- Caneta (amarela/verde) -->
         <rect x="0" y="0" width="35" height="130" fill="#5FA52E" rx="6"/>
         <rect x="0" y="0" width="35" height="40" fill="#F4D03F" rx="6"/>
         <ellipse cx="17.5" cy="40" rx="17.5" ry="8" fill="#C0C0C0"/>
         <polygon points="17.5,130 7.5,150 27.5,150" fill="#2D5016"/>
-
-        <!-- Lápis -->
         <g transform="translate(50, -20)">
             <rect x="0" y="0" width="30" height="140" fill="#5FA52E" rx="5"/>
             <rect x="0" y="0" width="30" height="35" fill="#F4D03F" rx="5"/>
@@ -171,25 +166,29 @@
         </g>
     </g>
 
-    <!-- Texto "MATERIAL ESCOLAR com até" -->
-    <text x="1150" y="100" font-family="Arial Black, sans-serif" font-size="52" font-weight="900" fill="#B30000" text-anchor="start" letter-spacing="1">MATERIAL</text>
-    <text x="1150" y="155" font-family="Arial Black, sans-serif" font-size="52" font-weight="900" fill="#B30000" text-anchor="start" letter-spacing="1">ESCOLAR</text>
-    <text x="1150" y="200" font-family="Brush Script MT, cursive" font-size="46" font-weight="normal" fill="#B30000" text-anchor="start" font-style="italic">com até</text>
+    <text x="1150" y="100" font-family="Arial Black, sans-serif" font-size="52" font-weight="900" fill="#B30000"
+          text-anchor="start" letter-spacing="1">MATERIAL
+    </text>
+    <text x="1150" y="155" font-family="Arial Black, sans-serif" font-size="52" font-weight="900" fill="#B30000"
+          text-anchor="start" letter-spacing="1">ESCOLAR
+    </text>
+    <text x="1150" y="200" font-family="Brush Script MT, cursive" font-size="46" font-weight="normal" fill="#B30000"
+          text-anchor="start" font-style="italic">com até
+    </text>
 
-    <!-- Destaque "50% DESCONTO" -->
     <g transform="translate(1120, 210)">
-        <!-- Número 50 grande -->
-        <text x="0" y="90" font-family="Impact, Arial Black, sans-serif" font-size="110" font-weight="900" fill="#CC0000" letter-spacing="-5" filter="url(#shadow)">50</text>
-
-        <!-- Símbolo % -->
-        <text x="200" y="50" font-family="Impact, Arial Black, sans-serif" font-size="50" font-weight="900" fill="#CC0000">%</text>
-
-        <!-- Box DESCONTO -->
+        <text x="0" y="90" font-family="Impact, Arial Black, sans-serif" font-size="110" font-weight="900"
+              fill="#CC0000" letter-spacing="-5" filter="url(#shadow)">50
+        </text>
+        <text x="200" y="50" font-family="Impact, Arial Black, sans-serif" font-size="50" font-weight="900"
+              fill="#CC0000">%
+        </text>
         <rect x="240" y="55" width="380" height="65" fill="#CC0000" rx="4"/>
-        <text x="430" y="100" font-family="Arial Black, sans-serif" font-size="46" font-weight="900" fill="#FFFFFF" text-anchor="middle" letter-spacing="2">DESCONTO</text>
+        <text x="430" y="100" font-family="Arial Black, sans-serif" font-size="46" font-weight="900" fill="#FFFFFF"
+              text-anchor="middle" letter-spacing="2">DESCONTO
+        </text>
     </g>
 
-    <!-- Elementos decorativos (folhas verdes) -->
     <ellipse cx="80" cy="320" rx="40" ry="15" fill="#2D5016" opacity="0.6"/>
     <ellipse cx="140" cy="330" rx="50" ry="18" fill="#4A7C2B" opacity="0.6"/>
 </svg>
@@ -197,156 +196,67 @@
 <!-- CONTEÚDO -->
 <main class="">
 
-    <!-- Novidades -->
-    <section class="mb-5">
-        <div class="container">
-            <h2 class="pt-4 mb-4 fw-bold text-center">Novidades</h2>
+    <!-- Filtros -->
+    <section class="container mt-4">
+        <div class="filter-section">
+            <div class="row align-items-center">
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <select class="form-select" id="filtroCategoria" onchange="aplicarFiltros()">
+                        <option value="">Todas as Categorias</option>
+                        <!-- Categorias serão carregadas dinamicamente -->
+                    </select>
+                </div>
+                <div class="col-md-8">
+                    <div class="btn-group" role="group">
+                        <input type="radio" class="btn-check" name="filtroTipo" id="filtroTodos" value="" checked
+                               onchange="aplicarFiltros()">
+                        <label class="btn btn-outline-primary" for="filtroTodos">Todos</label>
 
-            <div class="row g-4">
+                        <input type="radio" class="btn-check" name="filtroTipo" id="filtroNovidades" value="novidade"
+                               onchange="aplicarFiltros()">
+                        <label class="btn btn-outline-primary" for="filtroNovidades">Novidades</label>
 
-                <!-- Card 1 -->
-                <div class="col-6 col-md-4 col-lg-2">
-                    <div class="card shadow-sm">
-                        <img src="imagens/nov1.jpg" class="card-img-top" alt="Tinta Glitter Spray">
-                        <div class="card-body text-center">
-                            <p class="card-text small mb-2">Tinta Glitter Spray</p>
-                            <p class="fw-bold text-primary mb-0">R$ 18,00</p>
-                        </div>
+                        <input type="radio" class="btn-check" name="filtroTipo" id="filtroMaisVendidos"
+                               value="mais_vendido" onchange="aplicarFiltros()">
+                        <label class="btn btn-outline-primary" for="filtroMaisVendidos">Mais Vendidos</label>
+
+                        <input type="radio" class="btn-check" name="filtroTipo" id="filtroDestaques" value="destaque"
+                               onchange="aplicarFiltros()">
+                        <label class="btn btn-outline-primary" for="filtroDestaques">Destaques</label>
                     </div>
                 </div>
-
-                <!-- Card 2 -->
-                <div class="col-6 col-md-4 col-lg-2">
-                    <div class="card shadow-sm">
-                        <img src="imagens/nov2.jpg" class="card-img-top" alt="Livro Caça-Palavras">
-                        <div class="card-body text-center">
-                            <p class="card-text small mb-2">Livro Caça-Palavras</p>
-                            <p class="fw-bold text-primary mb-0">R$ 20,00</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 3 -->
-                <div class="col-6 col-md-4 col-lg-2">
-                    <div class="card shadow-sm">
-                        <img src="imagens/nov3.jpg" class="card-img-top" alt="Mochila Marie">
-                        <div class="card-body text-center">
-                            <p class="card-text small mb-2">Mochila Marie</p>
-                            <p class="fw-bold text-primary mb-0">R$ 54,00</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 4 -->
-                <div class="col-6 col-md-4 col-lg-2">
-                    <div class="card shadow-sm">
-                        <img src="imagens/nov4.jpg" class="card-img-top" alt="Giz Líquido">
-                        <div class="card-body text-center">
-                            <p class="card-text small mb-2">Giz Líquido</p>
-                            <p class="fw-bold text-primary mb-0">R$ 19,00</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 5 -->
-                <div class="col-6 col-md-4 col-lg-2">
-                    <div class="card shadow-sm">
-                        <img src="imagens/nov5.jpg" class="card-img-top" alt="Lousa Verde">
-                        <div class="card-body text-center">
-                            <p class="card-text small mb-2">Lousa Verde</p>
-                            <p class="fw-bold text-primary mb-0">R$ 98,00</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 6 -->
-                <div class="col-6 col-md-4 col-lg-2">
-                    <div class="card shadow-sm">
-                        <img src="imagens/nov6.jpg" class="card-img-top" alt="Kit Canetas Glitter">
-                        <div class="card-body text-center">
-                            <p class="card-text small mb-2">Kit Canetas Glitter</p>
-                            <p class="fw-bold text-primary mb-0">R$ 18,00</p>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
     </section>
 
-    <!-- Mais vendidos -->
+    <!-- Produtos -->
     <section class="mb-5">
         <div class="container">
-            <h2 class="mb-4 fw-bold text-center">Mais Vendidos</h2>
+            <h2 class="pt-4 mb-4 fw-bold text-center" id="tituloProdutos">Todos os Produtos</h2>
 
-            <div class="row g-4">
-
-                <div class="col-6 col-md-4 col-lg-2">
-                    <div class="card shadow-sm">
-                        <img src="imagens/mv1.jpg" class="card-img-top" alt="Borracha Faber Castell">
-                        <div class="card-body text-center">
-                            <p class="small mb-2">Borracha Faber Castell</p>
-                            <p class="fw-bold text-primary mb-0">R$ 12,00</p>
-                        </div>
-                    </div>
+            <!-- Loading -->
+            <div id="loading" class="loading">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Carregando...</span>
                 </div>
-
-                <div class="col-6 col-md-4 col-lg-2">
-                    <div class="card shadow-sm">
-                        <img src="imagens/mv2.jpg" class="card-img-top" alt="Caneta Bic 4 cores">
-                        <div class="card-body text-center">
-                            <p class="small mb-2">Caneta Bic 4 cores</p>
-                            <p class="fw-bold text-primary mb-0">R$ 12,95</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-6 col-md-4 col-lg-2">
-                    <div class="card shadow-sm">
-                        <img src="imagens/mv3.jpg" class="card-img-top" alt="Papel Glossy">
-                        <div class="card-body text-center">
-                            <p class="small mb-2">Papel Glossy</p>
-                            <p class="fw-bold text-primary mb-0">R$ 23,00</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-6 col-md-4 col-lg-2">
-                    <div class="card shadow-sm">
-                        <img src="imagens/mv4.jpg" class="card-img-top" alt="Marcador Retro">
-                        <div class="card-body text-center">
-                            <p class="small mb-2">Marcador Retro</p>
-                            <p class="fw-bold text-primary mb-0">R$ 12,95</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-6 col-md-4 col-lg-2">
-                    <div class="card shadow-sm">
-                        <img src="imagens/mv5.jpg" class="card-img-top" alt="Sulfite Epson">
-                        <div class="card-body text-center">
-                            <p class="small mb-2">Sulfite Epson</p>
-                            <p class="fw-bold text-primary mb-0">R$ 235,00</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-6 col-md-4 col-lg-2">
-                    <div class="card shadow-sm">
-                        <img src="imagens/mv6.jpg" class="card-img-top" alt="Caderno Tilibra">
-                        <div class="card-body text-center">
-                            <p class="small mb-2">Caderno Tilibra</p>
-                            <p class="fw-bold text-primary mb-0">R$ 29,95</p>
-                        </div>
-                    </div>
-                </div>
-
             </div>
+
+            <!-- Lista de Produtos -->
+            <div id="listaProdutos" class="row g-4" style="display: none;">
+                <!-- Produtos serão inseridos aqui via JavaScript -->
+            </div>
+
+            <!-- Mensagem de produto não encontrado -->
+            <div id="semProdutos" class="text-center py-5" style="display: none;">
+                <i class="fas fa-search fa-3x text-muted mb-3"></i>
+                <h4 class="text-muted">Nenhum produto encontrado</h4>
+                <p class="text-muted">Tente ajustar os filtros de busca</p>
+            </div>
+        </div>
     </section>
 
     <!-- FORMULÁRIO DE ORÇAMENTO -->
     <section class="form-section py-5">
-        <!-- Decorative Elements -->
         <div class="position-absolute top-0 start-0 w-100 h-100 opacity-10" style="pointer-events: none;">
             <div class="position-absolute"
                  style="top: 10%; left: 5%; width: 100px; height: 100px; background: white; border-radius: 50%; filter: blur(40px);"></div>
@@ -355,24 +265,20 @@
             <div class="position-absolute"
                  style="top: 40%; right: 5%; width: 80px; height: 80px; background: white; border-radius: 50%; filter: blur(30px);"></div>
         </div>
+
         <div class="container position-relative">
             <div class="row justify-content-center">
                 <div class="col-lg-10">
-
-                    <!-- Cabeçalho do Formulário -->
                     <div class="text-center mb-5">
                         <h2 class="fw-bold mb-3 text-white">Solicite seu Orçamento</h2>
                         <p class="text-white lead">Preencha o formulário abaixo e entraremos em contato em até 24
                             horas</p>
                     </div>
 
-                    <!-- Card do Formulário -->
                     <div class="border-0" style="backdrop-filter: blur(10px); background: rgba(255, 255, 255, 0.95);">
                         <div class="card-body p-4 p-md-5">
-                            <form id="orcamentoForm">
+                            <form id="orcamentoForm" onsubmit="enviarOrcamento(event)">
                                 <div class="row g-4">
-
-                                    <!-- Dados Pessoais -->
                                     <div class="col-12">
                                         <h5 class="fw-bold text-primary mb-3">
                                             <i class="fas fa-user me-2"></i>Dados Pessoais
@@ -385,8 +291,7 @@
                                         </label>
                                         <div class="input-group">
                                             <span class="input-group-text"><i class="fas fa-user"></i></span>
-                                            <input type="text" class="form-control" id="nome"
-                                                   placeholder="Digite seu nome completo" required>
+                                            <input type="text" class="form-control" id="nome" required>
                                         </div>
                                     </div>
 
@@ -396,8 +301,7 @@
                                         </label>
                                         <div class="input-group">
                                             <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-                                            <input type="email" class="form-control" id="email"
-                                                   placeholder="seu@email.com" required>
+                                            <input type="email" class="form-control" id="email" required>
                                         </div>
                                     </div>
 
@@ -407,28 +311,22 @@
                                         </label>
                                         <div class="input-group">
                                             <span class="input-group-text"><i class="fas fa-phone"></i></span>
-                                            <input type="tel" class="form-control" id="telefone"
-                                                   placeholder="(11) 99999-9999" required>
+                                            <input type="tel" class="form-control" id="telefone" required>
                                         </div>
                                     </div>
 
                                     <div class="col-md-6">
-                                        <label for="empresa" class="form-label fw-semibold">
-                                            Empresa
-                                        </label>
+                                        <label for="empresa" class="form-label fw-semibold">Empresa</label>
                                         <div class="input-group">
                                             <span class="input-group-text"><i class="fas fa-building"></i></span>
-                                            <input type="text" class="form-control" id="empresa"
-                                                   placeholder="Nome da sua empresa (opcional)">
+                                            <input type="text" class="form-control" id="empresa">
                                         </div>
                                     </div>
 
-                                    <!-- Divider -->
                                     <div class="col-12">
                                         <hr class="my-2">
                                     </div>
 
-                                    <!-- Detalhes do Orçamento -->
                                     <div class="col-12">
                                         <h5 class="fw-bold text-primary mb-3">
                                             <i class="fas fa-shopping-cart me-2"></i>Detalhes do Orçamento
@@ -436,56 +334,39 @@
                                     </div>
 
                                     <div class="col-md-6">
-                                        <label for="categoria" class="form-label fw-semibold">
-                                            Categoria de Produtos
-                                        </label>
+                                        <label for="categoriaOrcamento" class="form-label fw-semibold">Categoria de
+                                            Produtos</label>
                                         <div class="input-group">
                                             <span class="input-group-text"><i class="fas fa-tags"></i></span>
-                                            <select class="form-select" id="categoria">
+                                            <select class="form-select" id="categoriaOrcamento">
                                                 <option value="">Selecione uma categoria</option>
-                                                <option value="papelaria">Papelaria</option>
-                                                <option value="escritorio">Escritório</option>
-                                                <option value="brinquedos">Brinquedos</option>
-                                                <option value="papeis">Papéis Especiais</option>
-                                                <option value="artesanato">Artesanato</option>
-                                                <option value="diversos">Diversos</option>
                                             </select>
                                         </div>
                                     </div>
 
                                     <div class="col-md-6">
-                                        <label for="quantidade" class="form-label fw-semibold">
-                                            Quantidade Estimada
-                                        </label>
+                                        <label for="quantidade" class="form-label fw-semibold">Quantidade
+                                            Estimada</label>
                                         <div class="input-group">
                                             <span class="input-group-text"><i class="fas fa-box"></i></span>
-                                            <input type="text" class="form-control" id="quantidade"
-                                                   placeholder="Ex: 50 unidades, 10 caixas">
+                                            <input type="text" class="form-control" id="quantidade">
                                         </div>
                                     </div>
 
                                     <div class="col-12">
-                                        <label for="produtos" class="form-label fw-semibold">
+                                        <label for="produtosOrcamento" class="form-label fw-semibold">
                                             Produtos de Interesse <span class="text-danger">*</span>
                                         </label>
-                                        <textarea class="form-control" id="produtos" rows="4"
-                                                  placeholder="Descreva os produtos que você deseja orçar. Exemplo:
-- 10 caixas de canetas azuis
-- 5 resmas de papel A4
-- 20 cadernos universitários" required></textarea>
-                                        <small class="text-muted">Seja o mais específico possível para um orçamento mais
-                                            preciso</small>
+                                        <textarea class="form-control" id="produtosOrcamento" rows="4"
+                                                  required></textarea>
                                     </div>
 
                                     <div class="col-12">
-                                        <label for="mensagem" class="form-label fw-semibold">
-                                            Informações Adicionais
-                                        </label>
-                                        <textarea class="form-control" id="mensagem" rows="4"
-                                                  placeholder="Prazo de entrega, forma de pagamento preferida, observações especiais, etc."></textarea>
+                                        <label for="mensagem" class="form-label fw-semibold">Informações
+                                            Adicionais</label>
+                                        <textarea class="form-control" id="mensagem" rows="4"></textarea>
                                     </div>
 
-                                    <!-- Checkbox -->
                                     <div class="col-12">
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" id="aceiteTermos" required>
@@ -495,7 +376,6 @@
                                         </div>
                                     </div>
 
-                                    <!-- Botões -->
                                     <div class="col-12 text-center mt-4">
                                         <button type="submit" class="btn btn-primary btn-lg px-5 py-3 shadow">
                                             <i class="fas fa-paper-plane me-2"></i>Enviar Solicitação
@@ -505,15 +385,12 @@
                                             Seus dados estão seguros e não serão compartilhados
                                         </p>
                                     </div>
-
                                 </div>
                             </form>
                         </div>
                     </div>
-
                 </div>
             </div>
-        </div>
         </div>
     </section>
 
@@ -522,9 +399,7 @@
 <!-- FOOTER -->
 <footer class="bg-dark text-light pt-5 pb-3">
     <div class="container">
-
         <div class="row text-center text-md-start mb-4">
-
             <div class="col-md-4 mb-4">
                 <h5 class="fw-bold mb-3">Creative Papelaria</h5>
                 <p><i class="fas fa-map-marker-alt me-2"></i>Av. das Flores, 123 – São Paulo/SP</p>
@@ -548,18 +423,192 @@
                     <a href="#" class="text-light"><i class="fab fa-linkedin"></i></a>
                 </div>
             </div>
-
         </div>
 
         <div class="text-center pt-3 border-top border-secondary">
             <p class="mb-0">© 2025 Creative Papelaria - Todos os direitos reservados.</p>
         </div>
-
     </div>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
-</body>
+<script>
+    // Configuração da API
+    const API_URL = 'http://localhost:3000/api';
 
+    // Carregar dados ao iniciar
+    document.addEventListener('DOMContentLoaded', function () {
+        carregarCategorias();
+        carregarProdutos();
+    });
+
+    // Carregar categorias
+    async function carregarCategorias() {
+        try {
+            const response = await fetch(`${API_URL}/categorias`);
+            const data = await response.json();
+
+            if (data.sucesso) {
+                const selectFiltro = document.getElementById('filtroCategoria');
+                const selectOrcamento = document.getElementById('categoriaOrcamento');
+
+                data.dados.forEach(cat => {
+                    selectFiltro.innerHTML += `<option value="${cat.id}">${cat.nome}</option>`;
+                    selectOrcamento.innerHTML += `<option value="${cat.nome}">${cat.nome}</option>`;
+                });
+            }
+        } catch (error) {
+            console.error('Erro ao carregar categorias:', error);
+        }
+    }
+
+    // Carregar produtos
+    async function carregarProdutos(filtros = {}) {
+        const loading = document.getElementById('loading');
+        const listaProdutos = document.getElementById('listaProdutos');
+        const semProdutos = document.getElementById('semProdutos');
+
+        loading.style.display = 'flex';
+        listaProdutos.style.display = 'none';
+        semProdutos.style.display = 'none';
+
+        try {
+            let url = `${API_URL}/produtos?`;
+
+            if (filtros.categoria) url += `categoria=${filtros.categoria}&`;
+            if (filtros.novidade) url += `novidade=true&`;
+            if (filtros.mais_vendido) url += `mais_vendido=true&`;
+            if (filtros.destaque) url += `destaque=true&`;
+            if (filtros.busca) url += `busca=${encodeURIComponent(filtros.busca)}&`;
+
+            const response = await fetch(url);
+            const data = await response.json();
+
+            loading.style.display = 'none';
+
+            if (data.sucesso && data.dados.length > 0) {
+                renderizarProdutos(data.dados);
+                listaProdutos.style.display = 'flex';
+            } else {
+                semProdutos.style.display = 'block';
+            }
+        } catch (error) {
+            console.error('Erro ao carregar produtos:', error);
+            loading.style.display = 'none';
+            semProdutos.style.display = 'block';
+        }
+    }
+
+    // Renderizar produtos
+    function renderizarProdutos(produtos) {
+        const lista = document.getElementById('listaProdutos');
+        lista.innerHTML = '';
+
+        produtos.forEach(produto => {
+            const temPromocao = produto.preco_promocional && produto.preco_promocional < produto.preco;
+            const precoFinal = temPromocao ? produto.preco_promocional : produto.preco;
+
+            const card = `
+            <div class="col-6 col-md-4 col-lg-2">
+                <div class="card shadow-sm position-relative">
+                    ${produto.novidade ? '<span class="badge bg-success badge-novidade">Novidade</span>' : ''}
+                    <img src="${produto.imagem_url}" class="card-img-top" alt="${produto.nome}" onerror="this.src='imagens/placeholder.jpg'">
+                    <div class="card-body text-center">
+                        <p class="card-text small mb-2">${produto.nome}</p>
+                        ${temPromocao ? `<p class="preco-original mb-1">R$ ${parseFloat(produto.preco).toFixed(2)}</p>` : ''}
+                        <p class="fw-bold text-primary mb-0">R$ ${parseFloat(precoFinal).toFixed(2)}</p>
+                        ${produto.estoque > 0 ?
+                `<small class="text-success"><i class="fas fa-check-circle"></i> Em estoque</small>` :
+                `<small class="text-danger"><i class="fas fa-times-circle"></i> Indisponível</small>`
+            }
+                    </div>
+                </div>
+            </div>
+        `;
+
+            lista.innerHTML += card;
+        });
+    }
+
+    // Aplicar filtros
+    function aplicarFiltros() {
+        const categoria = document.getElementById('filtroCategoria').value;
+        const tipoFiltro = document.querySelector('input[name="filtroTipo"]:checked').value;
+
+        const filtros = {
+            categoria: categoria
+        };
+
+        // Atualizar título
+        let titulo = 'Todos os Produtos';
+
+        if (tipoFiltro === 'novidade') {
+            filtros.novidade = true;
+            titulo = 'Novidades';
+        } else if (tipoFiltro === 'mais_vendido') {
+            filtros.mais_vendido = true;
+            titulo = 'Mais Vendidos';
+        } else if (tipoFiltro === 'destaque') {
+            filtros.destaque = true;
+            titulo = 'Destaques';
+        }
+
+        document.getElementById('tituloProdutos').textContent = titulo;
+        carregarProdutos(filtros);
+    }
+
+    // Buscar produtos
+    function buscarProdutos() {
+        const busca = document.getElementById('buscaProduto').value;
+        carregarProdutos({busca: busca});
+    }
+
+    // Enter na busca
+    document.getElementById('buscaProduto').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+            buscarProdutos();
+        }
+    });
+
+    // Enviar orçamento
+    async function enviarOrcamento(e) {
+        e.preventDefault();
+
+        const dados = {
+            nome: document.getElementById('nome').value,
+            email: document.getElementById('email').value,
+            telefone: document.getElementById('telefone').value,
+            empresa: document.getElementById('empresa').value,
+            categoria: document.getElementById('categoriaOrcamento').value,
+            quantidade: document.getElementById('quantidade').value,
+            produtos: document.getElementById('produtosOrcamento').value,
+            mensagem: document.getElementById('mensagem').value
+        };
+
+        try {
+            const response = await fetch(`${API_URL}/orcamento`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(dados)
+            });
+
+            const result = await response.json();
+
+            if (result.sucesso) {
+                alert(result.mensagem);
+                document.getElementById('orcamentoForm').reset();
+            } else {
+                alert('Erro ao enviar orçamento. Tente novamente.');
+            }
+        } catch (error) {
+            console.error('Erro:', error);
+            alert('Erro ao enviar orçamento. Tente novamente.');
+        }
+    }
+</script>
+
+</body>
 </html>
